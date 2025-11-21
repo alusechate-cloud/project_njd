@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - Najd Kitchen</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B4513;
+            --secondary: #D2691E;
+            --accent: #FFD700;
+            --light: #F5F5DC;
+            --dark: #2F4F4F;
+            --text: #333333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Menu Hero Section */
+        .menu-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .menu-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .menu-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Menu Categories */
+        .menu-categories {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: var(--light);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--dark);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Menu Items Grid */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-item-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .menu-item-price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+
+        .menu-item-description {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .spicy-level {
+            display: flex;
+            align-items: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .spicy-level i {
+            color: #ff6b6b;
+            margin-right: 5px;
+        }
+
+        /* Pricing Table */
+        .pricing-section {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .pricing-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .pricing-table .price {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab {
+                width: 80%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <span class="logo-text">Najd Kitchen</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="menu.html" style="color: var(--accent);"><i class="fas fa-utensils"></i> Menu</a></li>
+                    <li><a href="about.html"><i class="fas fa-user"></i> About Chef</a></li>
+                    <li><a href="order.html"><i class="fas fa-shopping-cart"></i> Order Online</a></li>
+                    <li><a href="culture.html"><i class="fas fa-landmark"></i> Food Culture</a></li>
+                </ul>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Menu Hero Section -->
+    <section class="menu-hero">
+        <div class="container">
+            <div class="menu-hero-content">
+                <h1>Our Traditional Menu</h1>
+                <p>Discover the authentic flavors of Najd with our home-style dishes prepared from generations-old
+                    recipes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="menu-categories">
+        <div class="container">
+            <h2 class="section-title">Traditional Najdi Dishes</h2>
+
+            <div class="category-tabs">
+                <button class="tab active" data-category="all">All Dishes</button>
+                <button class="tab" data-category="main">Main Courses</button>
+                <button class="tab" data-category="appetizers">Appetizers</button>
+                <button class="tab" data-category="desserts">Desserts</button>
+                <button class="tab" data-category="beverages">Beverages</button>
+            </div>
+
+            <div class="menu-items">
+                <!-- Jareesh -->
+                <div class="menu-item" data-category="main">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Jareesh</h3>
+                            <span class="menu-item-price">35 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Slow-cooked crushed wheat with tender meat, flavored with
+                            traditional spices and served with ghee.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>Mild</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qursan -->
+                <div class="menu-item" data-category="main">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Qursan</h3>
+                            <span class="menu-item-price">42 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Thin bread soaked in a rich lamb broth, topped with tender meat
+                            and fragrant spices.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>Medium</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Margoog -->
+                <div class="menu-item" data-category="main">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Margoog</h3>
+                            <span class="menu-item-price">38 SAR</span>
+                        </div>
+                        <p class="menu-item-description">A hearty vegetable and meat stew with thin dough strips, cooked
+                            to perfection with traditional spices.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>Medium</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matazeez -->
+                <div class="menu-item" data-category="main">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Matazeez</h3>
+                            <span class="menu-item-price">40 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Dumplings in a rich broth with vegetables and meat, seasoned
+                            with traditional Arabian spices.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>Mild</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dates Plate -->
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1597872200969-2c65e4cde6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Dates Plate</h3>
+                            <span class="menu-item-price">18 SAR</span>
+                        </div>
+                        <p class="menu-item-description">A selection of premium Saudi dates served with Arabic coffee,
+                            perfect as a starter.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>None</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kleeja -->
+                <div class="menu-item" data-category="desserts">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Kleeja</h3>
+                            <span class="menu-item-price">25 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Traditional Najdi cookies filled with dates and aromatic
+                            spices, baked to perfection.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>None</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arabic Coffee -->
+                <div class="menu-item" data-category="beverages">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1564352969906-87d42e3a61a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Arabic Coffee</h3>
+                            <span class="menu-item-price">12 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Traditional Saudi coffee infused with cardamom and saffron,
+                            served in a dallah.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>None</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laban -->
+                <div class="menu-item" data-category="beverages">
+                    <div class="menu-item-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Laban</h3>
+                            <span class="menu-item-price">10 SAR</span>
+                        </div>
+                        <p class="menu-item-description">Traditional buttermilk drink, refreshing and perfect to
+                            complement our spicy dishes.</p>
+                        <div class="menu-item-footer">
+                            <div class="spicy-level">
+                                <i class="fas fa-pepper-hot"></i>
+                                <span>None</span>
+                            </div>
+                            <a href="order.html" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Table -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Complete Price List</h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Dish Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jareesh</td>
+                        <td>Slow-cooked crushed wheat with tender meat</td>
+                        <td class="price">35 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Qursan</td>
+                        <td>Thin bread in lamb broth with meat</td>
+                        <td class="price">42 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Margoog</td>
+                        <td>Vegetable and meat stew with dough strips</td>
+                        <td class="price">38 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Matazeez</td>
+                        <td>Dumplings in rich broth with vegetables and meat</td>
+                        <td class="price">40 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Dates Plate</td>
+                        <td>Selection of premium Saudi dates with Arabic coffee</td>
+                        <td class="price">18 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Kleeja</td>
+                        <td>Traditional Najdi cookies with date filling</td>
+                        <td class="price">25 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Arabic Coffee</td>
+                        <td>Traditional Saudi coffee with cardamom and saffron</td>
+                        <td class="price">12 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Laban</td>
+                        <td>Traditional buttermilk drink</td>
+                        <td class="price">10 SAR</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Taste Authentic Najdi Cuisine?</h2>
+            <p>Order now and experience the rich flavors of traditional Saudi home cooking delivered to your doorstep in
+                Riyadh.</p>
+            <a href="order.html" class="btn cta-btn">Order Online Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Najd Kitchen</h3>
+                    <p>Preserving the traditional flavors of Najd, one dish at a time.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Chef</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</li>
+                        <li><i class="fas fa-phone"></i> +966 5X XXX XXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@najdkitchen.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore More</h3>
+                    <ul class="footer-links">
+                        <li><a href="culture.html">Saudi Food Culture</a></li>
+                        <li><a href="#">Catering Services</a></li>
+                        <li><a href="#">Recipe Blog</a></li>
+                        <li><a href="#">Special Events</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Najd Kitchen. All rights reserved. | Traditional Home Cooking of Riyadh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Tab functionality for menu categories
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    const category = this.getAttribute('data-category');
+
+                    // Show/hide menu items based on category
+                    menuItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add animation to menu items on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            menuItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+
+</html>

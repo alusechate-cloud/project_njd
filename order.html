@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Najd Kitchen</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B4513;
+            --secondary: #D2691E;
+            --accent: #FFD700;
+            --light: #F5F5DC;
+            --dark: #2F4F4F;
+            --text: #333333;
+            --success: #28a745;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Order Hero Section */
+        .order-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .order-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .order-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .order-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Order Section */
+        .order-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        /* Order Form */
+        .order-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .cart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: var(--secondary);
+        }
+
+        .item-quantity {
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--secondary);
+            min-width: 70px;
+            text-align: right;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 1rem 0;
+            border-top: 2px solid var(--primary);
+            margin-top: 1rem;
+        }
+
+        .total-price {
+            color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-modal {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.5s;
+        }
+
+        .modal-overlay.active .success-modal {
+            transform: translateY(0);
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: var(--success);
+            margin-bottom: 1.5rem;
+        }
+
+        .success-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .order-details {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .order-details h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .order-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-label {
+            font-weight: 600;
+        }
+
+        .modal-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .modal-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .order-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .order-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+
+            .success-modal {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <span class="logo-text">Najd Kitchen</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="menu.html"><i class="fas fa-utensils"></i> Menu</a></li>
+                    <li><a href="about.html"><i class="fas fa-user"></i> About Chef</a></li>
+                    <li><a href="order.html" style="color: var(--accent);"><i class="fas fa-shopping-cart"></i> Order
+                            Online</a></li>
+                    <li><a href="culture.html"><i class="fas fa-landmark"></i> Food Culture</a></li>
+                </ul>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Order Hero Section -->
+    <section class="order-hero">
+        <div class="container">
+            <div class="order-hero-content">
+                <h1>Order Traditional Najdi Food</h1>
+                <p>Enjoy authentic Saudi home cooking delivered to your doorstep in Riyadh</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="order-section">
+        <div class="container">
+            <h2 class="section-title">Place Your Order</h2>
+
+            <div class="order-container">
+                <!-- Order Form -->
+                <div class="order-form">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 1.5rem;">
+                        Delivery Information</h3>
+
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" placeholder="Enter your full name"
+                                required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="05X XXX XXXX" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="your@email.com"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Delivery Address</label>
+                            <textarea id="address" class="form-control" rows="3"
+                                placeholder="Enter your complete address in Riyadh" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <input type="text" id="district" class="form-control"
+                                    placeholder="e.g. Al Olaya, Al Malaz" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="time">Preferred Delivery Time</label>
+                                <select id="time" class="form-control" required>
+                                    <option value="">Select time</option>
+                                    <option value="asap">As Soon As Possible</option>
+                                    <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+                                    <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+                                    <option value="18:00-20:00">6:00 PM - 8:00 PM</option>
+                                    <option value="20:00-22:00">8:00 PM - 10:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instructions">Special Instructions</label>
+                            <textarea id="instructions" class="form-control" rows="3"
+                                placeholder="Any special requests or delivery instructions"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment">Payment Method</label>
+                            <select id="payment" class="form-control" required>
+                                <option value="">Select payment method</option>
+                                <option value="cash">Cash on Delivery</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="applepay">Apple Pay</option>
+                                <option value="stcpay">STC Pay</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn" id="submitOrder">Place Order</button>
+                    </form>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3 class="cart-title">Your Order</h3>
+
+                    <div class="cart-items">
+                        <div class="cart-item">
+                            <div class="item-name">Jareesh</div>
+                            <div class="item-controls">
+                                <button class="quantity-btn minus" data-item="jareesh">-</button>
+                                <span class="item-quantity" data-item="jareesh">1</span>
+                                <button class="quantity-btn plus" data-item="jareesh">+</button>
+                            </div>
+                            <div class="item-price">35 SAR</div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div class="item-name">Qursan</div>
+                            <div class="item-controls">
+                                <button class="quantity-btn minus" data-item="qursan">-</button>
+                                <span class="item-quantity" data-item="qursan">1</span>
+                                <button class="quantity-btn plus" data-item="qursan">+</button>
+                            </div>
+                            <div class="item-price">42 SAR</div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div class="item-name">Margoog</div>
+                            <div class="item-controls">
+                                <button class="quantity-btn minus" data-item="margoog">-</button>
+                                <span class="item-quantity" data-item="margoog">0</span>
+                                <button class="quantity-btn plus" data-item="margoog">+</button>
+                            </div>
+                            <div class="item-price">38 SAR</div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div class="item-name">Kleeja</div>
+                            <div class="item-controls">
+                                <button class="quantity-btn minus" data-item="kleeja">-</button>
+                                <span class="item-quantity" data-item="kleeja">0</span>
+                                <button class="quantity-btn plus" data-item="kleeja">+</button>
+                            </div>
+                            <div class="item-price">25 SAR</div>
+                        </div>
+                    </div>
+
+                    <div class="cart-total">
+                        <div>Total Amount:</div>
+                        <div class="total-price" id="totalPrice">77 SAR</div>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                        <i class="fas fa-truck"></i> Free delivery within Riyadh
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title">Order Confirmed!</h2>
+            <p class="success-message">Thank you for your order. Your traditional Najdi meal is being prepared with love
+                and will be delivered soon.</p>
+
+            <div class="order-details">
+                <h4>Order Summary</h4>
+                <div class="order-info" id="orderSummary">
+                    <!-- JavaScript will populate this -->
+                </div>
+            </div>
+
+            <button class="modal-btn" id="backToHome">Back to Homepage</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Najd Kitchen</h3>
+                    <p>Preserving the traditional flavors of Najd, one dish at a time.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Chef</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</li>
+                        <li><i class="fas fa-phone"></i> +966 5X XXX XXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@najdkitchen.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore More</h3>
+                    <ul class="footer-links">
+                        <li><a href="culture.html">Saudi Food Culture</a></li>
+                        <li><a href="#">Catering Services</a></li>
+                        <li><a href="#">Recipe Blog</a></li>
+                        <li><a href="#">Special Events</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Najd Kitchen. All rights reserved. | Traditional Home Cooking of Riyadh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prices for each item
+            const prices = {
+                jareesh: 35,
+                qursan: 42,
+                margoog: 38,
+                kleeja: 25
+            };
+
+            // Initialize quantities
+            let quantities = {
+                jareesh: 1,
+                qursan: 1,
+                margoog: 0,
+                kleeja: 0
+            };
+
+            // Calculate and update total
+            function updateTotal() {
+                let total = 0;
+                for (const item in quantities) {
+                    total += quantities[item] * prices[item];
+                }
+                document.getElementById('totalPrice').textContent = total + ' SAR';
+
+                // Enable/disable order button based on if there are items
+                const submitBtn = document.getElementById('submitOrder');
+                submitBtn.disabled = total === 0;
+            }
+
+            // Quantity button handlers
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const item = this.getAttribute('data-item');
+                    const isPlus = this.classList.contains('plus');
+
+                    if (isPlus) {
+                        quantities[item]++;
+                    } else if (quantities[item] > 0) {
+                        quantities[item]--;
+                    }
+
+                    // Update quantity display
+                    document.querySelector(`.item-quantity[data-item="${item}"]`).textContent = quantities[item];
+
+                    // Update total
+                    updateTotal();
+                });
+            });
+
+            // Form submission
+            document.getElementById('orderForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Check if there are items in the cart
+                const total = Object.values(quantities).reduce((sum, qty) => sum + qty, 0);
+                if (total === 0) {
+                    alert('Please add at least one item to your order.');
+                    return;
+                }
+
+                // Get form data
+                const formData = {
+                    name: document.getElementById('fullName').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    district: document.getElementById('district').value,
+                    time: document.getElementById('time').value,
+                    instructions: document.getElementById('instructions').value,
+                    payment: document.getElementById('payment').value,
+                    items: quantities,
+                    total: document.getElementById('totalPrice').textContent
+                };
+
+                // Update order summary in modal
+                const orderSummary = document.getElementById('orderSummary');
+                orderSummary.innerHTML = `
+                    <p><span class="info-label">Order #:</span> NK${Math.floor(1000 + Math.random() * 9000)}</p>
+                    <p><span class="info-label">Customer:</span> ${formData.name}</p>
+                    <p><span class="info-label">Delivery to:</span> ${formData.district}</p>
+                    <p><span class="info-label">Estimated Time:</span> ${formData.time === 'asap' ? '30-45 minutes' : formData.time}</p>
+                    <p><span class="info-label">Total:</span> ${formData.total}</p>
+                `;
+
+                // Show success modal
+                document.getElementById('successModal').classList.add('active');
+            });
+
+            // Back to home button
+            document.getElementById('backToHome').addEventListener('click', function () {
+                window.location.href = 'index.html';
+            });
+
+            // Initialize total on page load
+            updateTotal();
+        });
+    </script>
+</body>
+
+</html>
